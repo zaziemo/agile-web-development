@@ -6,7 +6,7 @@ one:
   image_url: MyString
   price: 9.99
 
-another_book:
+two:
   title: This is just another another_book
   description: All things interesting
   image_url: another_book.png
