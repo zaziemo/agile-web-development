@@ -50,6 +50,15 @@ class ProductTest < ActiveSupport::TestCase
     end
   end
 
+  test "product is not valid without a unique image_url" do
+    product = Product.new(title: "Just another Book",
+                          description: "aoisdjoaisdj",
+                          price: 6.95,
+                          image_url: products(:ruby).image_url)
+    product.save
+    assert_equal "has already been taken", product.errors[:image_url].join('; ')
+  end
+
   test "product is not valid without a unique title" do
     product = Product.new(title: products(:ruby).title,
                           description: "yyy",
