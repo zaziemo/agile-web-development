@@ -16,11 +16,11 @@ class PaymentTypesControllerTest < ActionDispatch::IntegrationTest
   end
 
   test "should create payment_type" do
-    assert_difference('PayType.count') do
+    assert_difference('PaymentType.count') do
       post payment_types_url, params: { payment_type: { name: @payment_type.name } }
     end
 
-    assert_redirected_to payment_type_url(PayType.last)
+    assert_redirected_to payment_type_url(PaymentType.last)
   end
 
   test "should show payment_type" do
@@ -39,7 +39,7 @@ class PaymentTypesControllerTest < ActionDispatch::IntegrationTest
   end
 
   test "should destroy payment_type" do
-    assert_difference('PayType.count', -1) do
+    assert_difference('PaymentType.count', -1) do
       delete payment_type_url(@payment_type)
     end
 
