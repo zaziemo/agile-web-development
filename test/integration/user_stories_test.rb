@@ -22,9 +22,7 @@ class UserStoriesTest < ActionDispatch::IntegrationTest
     assert_response :success
     assert_select 'h1', "Your Pragmatic Catalog"
 
-    p ruby_book
-    p ruby_book.id
-    post '/line_items', params: { product_id: products(:ruby).id }, xhr: true
+    post '/line_items', params: { product_id: ruby_book.id }, xhr: true
     assert_response :success
 
     cart = Cart.find(session[:cart_id])
@@ -41,7 +39,7 @@ class UserStoriesTest < ActionDispatch::IntegrationTest
           name: "Dave Thomas",
           address: "123 The Street",
           email: "dave@example.com",
-          payment_type: payment_type
+          payment_type_id: 1
         }
       }
 
