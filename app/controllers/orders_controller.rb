@@ -3,7 +3,7 @@ class OrdersController < ApplicationController
 
   before_action :set_cart, only: [:new, :create]
   before_action :ensure_cart_isnt_empty, only: :new
-  before_action :set_order, only: [:show, :edit, :update, :destroy]
+  before_action :set_order, only: [:show, :edit, :update, :destroy, :ship]
 
   # GET /orders
   # GET /orders.json
@@ -69,6 +69,16 @@ class OrdersController < ApplicationController
     end
   end
 
+  def ship
+    if @order.ship_date.present?
+      head :forbidden
+    else
+      @order.update!(ship_date: Time.zone.now)
+      OrderMailer.shipped(@order).deliver_later
+      redirect_to @order
+    end
+  end
+
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_order
@@ -77,7 +87,7 @@ class OrdersController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def order_params
-      params.require(:order).permit(:name, :address, :email, :payment_type_id)
+      params.require(:order).permit(:name, :address, :email, :payment_type_id, :ship_date)
     end
 
     def ensure_cart_isnt_empty

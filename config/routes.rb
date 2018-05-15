@@ -1,6 +1,11 @@
 Rails.application.routes.draw do
   resources :payment_types
-  resources :orders
+  resources :orders do
+    member do
+      post 'ship'
+    end
+  end
+
   resources :line_items do
     member do
       post 'decrement'
