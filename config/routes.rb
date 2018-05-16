@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  resources :users
   resources :payment_types
   resources :orders do
     member do
