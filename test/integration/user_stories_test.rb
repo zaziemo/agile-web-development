@@ -66,6 +66,16 @@ class UserStoriesTest < ActionDispatch::IntegrationTest
       assert_equal ["dave@example.com"], mail.to
       assert_equal ["depot@example.com"], mail.from
       assert_equal "Pragmatic Store Order Confirmation", mail.subject
+
+      get "/orders/#{order.id}"
+      assert_response :success
+
+      post "/orders/#{order.id}/ship", :params => { ship_date: Time.zone.now }
+
+      mail = ActionMailer::Base.deliveries.last
+      assert_equal ["dave@example.com"], mail.to
+      assert_equal ["depot@example.com"], mail.from
+      assert_equal "Pragmatic Store Order Shipped", mail.subject
     end
   end
 end
