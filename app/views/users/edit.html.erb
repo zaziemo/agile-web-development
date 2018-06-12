@@ -1,6 +1,19 @@
 <h1>Editing User</h1>
+<% if @user.errors.any? %>
+  <div id="error_explanation">
+    <h2><%= pluralize(@user.errors.count, "error") %> prohibited this user from being saved:</h2>
 
-<%= render 'form', user: @user %>
+    <ul>
+    <% @user.errors.full_messages.each do |message| %>
+      <li><%= message %></li>
+    <% end %>
+    </ul>
+  </div>
+<% end %>
 
+<%= render 'users/form', user: @user %>
+<%= render 'users/password_form', user: @user %>
+
+<%= link_to 'Edit PW', user_password_path(@user.id) %>
 <%= link_to 'Show', @user %> |
 <%= link_to 'Back', users_path %>

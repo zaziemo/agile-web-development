@@ -1,5 +1,16 @@
 Rails.application.routes.draw do
-  resources :users
+  get 'admin' => 'admin#index'
+
+  controller :sessions do
+    get 'login' => :new
+    post 'login' => :create
+    delete 'logout' => :destroy
+  end
+
+  resources :users do
+    resource :password, only: :update
+  end
+
   resources :payment_types
   resources :orders do
     member do
