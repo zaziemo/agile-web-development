@@ -1,9 +1,12 @@
 class LineItemsController < ApplicationController
+  skip_before_action :authorize, only: :create
   include CurrentCart
   include SessionCounter
+
   before_action :set_cart, only: [:create]
   before_action :set_line_item, only: [:show, :edit, :update, :destroy]
   before_action :increment_counter, only: [:create]
+
 
   # GET /line_items
   # GET /line_items.json
