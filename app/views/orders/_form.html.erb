@@ -12,26 +12,26 @@
   <% end %>
 
   <div class="field">
-    <%= f.label :name %>
+    <%= f.label :name, t('.name') %>
     <%= f.text_field :name, size: 40 %>
   </div>
 
   <div class="field">
-    <%= f.label :address %>
+    <%= f.label :address, t('.address_html') %>
     <%= f.text_area :address, rows: 3, cols: 40 %>
   </div>
 
   <div class="field">
-    <%= f.label :email %>
+    <%= f.label :email, t('.email') %>
     <%= f.text_field :email, size: 40 %>
   </div>
 
   <div class="field">
-    <%= f.label :payment_type_id %>
-    <%= collection_select(:order, :payment_type_id, PaymentType.all, :id, :name) %>
+    <%= f.label :payment_type_id, t('.payment_type') %>
+    <%= collection_select(:order, :payment_type_id, PaymentType.all, :id, :name, prompt: t('.pay_prompt_html')) %>
   </div>
 
   <div class="actions">
-    <%= f.submit 'Place Order' %>
+    <%= f.submit t('.submit') %>
   </div>
 <% end %>

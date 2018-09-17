@@ -12,20 +12,23 @@ Rails.application.routes.draw do
   end
 
   resources :payment_types
-  resources :orders do
-    member do
-      post 'ship'
-    end
-  end
 
-  resources :line_items do
-    member do
-      post 'decrement'
+  scope '(:locale)' do
+    resources :orders do
+      member do
+        post 'ship'
+      end
     end
-  end
 
-  resources :carts
-  root 'store#index', as: 'store_index'
+    resources :line_items do
+      member do
+        post 'decrement'
+      end
+    end
+
+    resources :carts
+    root 'store#index', as: 'store_index'
+  end
 
   resources :products do
     get :who_bought, on: :member
