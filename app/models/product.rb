@@ -15,6 +15,10 @@ class Product < ApplicationRecord
   }
   validates :image_url, uniqueness: true
 
+  def localized_price
+    price * 0.87
+  end
+
   private
     # ensure that there are no line items referencing this product
     def ensure_not_referenced_by_any_line_item
